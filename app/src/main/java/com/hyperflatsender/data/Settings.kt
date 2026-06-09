@@ -1,4 +1,4 @@
-package com.hyperionflatsender.data
+package com.hyperflatsender.data
 
 data class Settings(
     val serverIp: String = "",
@@ -12,7 +12,7 @@ data class Settings(
     val frameRate: Int = 24,
     val multiplier: Int = 1,
     val priority: Int = 150,
-    val origin: String = "HyperionFlatSender",
+    val origin: String = "HyperFlatSender",
     val autoStartOnBoot: Boolean = false,
     val showStats: Boolean = false,
     val gateMirror: Boolean = false,

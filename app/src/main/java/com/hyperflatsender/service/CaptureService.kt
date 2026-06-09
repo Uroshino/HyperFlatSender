@@ -1,4 +1,4 @@
-package com.hyperionflatsender.service
+package com.hyperflatsender.service
 
 import android.app.Activity
 import android.app.Notification
@@ -24,15 +24,15 @@ import android.view.Surface
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
-import com.hyperionflatsender.HyperionApp
-import com.hyperionflatsender.MainActivity
-import com.hyperionflatsender.R
-import com.hyperionflatsender.capture.FrameProcessor
-import com.hyperionflatsender.data.Adjustment
-import com.hyperionflatsender.data.Settings
-import com.hyperionflatsender.network.ConnectionState
-import com.hyperionflatsender.network.HyperionClient
-import com.hyperionflatsender.network.HyperionJsonClient
+import com.hyperflatsender.HyperionApp
+import com.hyperflatsender.MainActivity
+import com.hyperflatsender.R
+import com.hyperflatsender.capture.FrameProcessor
+import com.hyperflatsender.data.Adjustment
+import com.hyperflatsender.data.Settings
+import com.hyperflatsender.network.ConnectionState
+import com.hyperflatsender.network.HyperionClient
+import com.hyperflatsender.network.HyperionJsonClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -85,7 +85,7 @@ class CaptureService : LifecycleService() {
     }
 
     private val client = HyperionClient(lifecycleScope)
-    private val flatbuffers by lazy { com.hyperionflatsender.network.HyperionFlatbuffers() }
+    private val flatbuffers by lazy { com.hyperflatsender.network.HyperionFlatbuffers() }
 
     private var mediaProjection: MediaProjection? = null
     private var virtualDisplay: android.hardware.display.VirtualDisplay? = null

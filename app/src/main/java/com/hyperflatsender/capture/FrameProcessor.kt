@@ -1,4 +1,4 @@
-package com.hyperionflatsender.capture
+package com.hyperflatsender.capture
 
 import android.media.Image
 

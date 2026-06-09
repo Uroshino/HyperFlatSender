@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui.theme
+package com.hyperflatsender.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

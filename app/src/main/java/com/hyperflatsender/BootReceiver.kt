@@ -1,10 +1,10 @@
-package com.hyperionflatsender
+package com.hyperflatsender
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
-import com.hyperionflatsender.service.CaptureService
+import com.hyperflatsender.service.CaptureService
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 

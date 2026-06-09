@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui
+package com.hyperflatsender.ui
 
 import android.content.Context
 import android.view.WindowManager
@@ -56,9 +56,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hyperionflatsender.BuildConfig
-import com.hyperionflatsender.data.ServerType
-import com.hyperionflatsender.data.Settings
+import com.hyperflatsender.BuildConfig
+import com.hyperflatsender.data.ServerType
+import com.hyperflatsender.data.Settings
 import kotlinx.coroutines.delay
 
 @Composable
@@ -143,7 +143,7 @@ fun SettingsScreen(
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                "HyperionFlatSender · v${BuildConfig.VERSION_NAME}",
+                "HyperFlatSender · v${BuildConfig.VERSION_NAME}",
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                 fontSize = 13.sp
             )
@@ -607,7 +607,7 @@ private fun MultiplierSelector(
     labelWidth: Dp?,
     onSelect: (Int) -> Unit
 ) {
-    val options = com.hyperionflatsender.data.Settings.MULTIPLIERS
+    val options = com.hyperflatsender.data.Settings.MULTIPLIERS
 
     val content: @Composable () -> Unit = {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

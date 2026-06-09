@@ -1,7 +1,7 @@
-package com.hyperionflatsender
+package com.hyperflatsender
 
 import android.app.Application
-import com.hyperionflatsender.data.SettingsRepository
+import com.hyperflatsender.data.SettingsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

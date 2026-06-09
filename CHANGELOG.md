@@ -1,9 +1,23 @@
 # Changelog
 
-All notable changes to **HyperionFlatSender** are documented in this file.
+All notable changes to **HyperFlatSender** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.2] - 2026-06-09
+
+### Added
+- **HyperHDR support** for the calibration colour-adjustment channel. A new **Server type** setting
+  (*Hyperion* / *HyperHDR*) formats the JSON-RPC `adjustment` keys for the selected server — HyperHDR
+  uses a single `gamma` (no per-channel) and `luminanceGain` in place of Hyperion's per-channel gamma
+  and `brightnessGain`, and like Hyperion rejects unknown keys wholesale (`additionalProperties:false`).
+  The FlatBuffers image stream (port `19400`) and JSON-RPC token auth are identical for both servers.
+
+### Changed
+- **Renamed the app from HyperionFlatSender to HyperFlatSender** (package `com.hyperflatsender`). The
+  application ID changed, so v1.2 installs *alongside* an existing HyperionFlatSender build rather than
+  upgrading it — uninstall the old app if you don't want both.
 
 ## [1.1] - 2026-06-09
 
@@ -153,5 +167,5 @@ Tuned for Android 12+ on Arm Mali (MT5895 / Mali-G57):
   keyboard no longer pops up on every D-pad move. Press centre/OK to edit (which shows the
   keyboard) and Back to stop editing without leaving the screen.
 
-[1.1]: https://github.com/Uroshino/HyperionFlatSender/releases/tag/v1.1
-[1.0]: https://github.com/Uroshino/HyperionFlatSender/releases/tag/v1.0
+[1.1]: https://github.com/Uroshino/HyperFlatSender/releases/tag/v1.1
+[1.0]: https://github.com/Uroshino/HyperFlatSender/releases/tag/v1.0

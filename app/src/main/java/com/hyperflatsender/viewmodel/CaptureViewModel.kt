@@ -1,16 +1,16 @@
-package com.hyperionflatsender.viewmodel
+package com.hyperflatsender.viewmodel
 
 import android.app.Application
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.hyperionflatsender.HyperionApp
-import com.hyperionflatsender.data.Settings
-import com.hyperionflatsender.network.ConnectionState
-import com.hyperionflatsender.service.CaptureService
-import com.hyperionflatsender.service.CaptureState
-import com.hyperionflatsender.service.Stats
+import com.hyperflatsender.HyperionApp
+import com.hyperflatsender.data.Settings
+import com.hyperflatsender.network.ConnectionState
+import com.hyperflatsender.service.CaptureService
+import com.hyperflatsender.service.CaptureState
+import com.hyperflatsender.service.Stats
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

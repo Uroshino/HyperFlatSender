@@ -17,7 +17,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:theme="@style/Theme.HyperionFlatSender"
+        android:theme="@style/Theme.HyperFlatSender"
         android:banner="@drawable/tv_banner">
 
         <activity

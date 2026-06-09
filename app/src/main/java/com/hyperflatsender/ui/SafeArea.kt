@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui
+package com.hyperflatsender.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package com.hyperionflatsender.network
+package com.hyperflatsender.network
 
 import com.google.flatbuffers.FlatBufferBuilder
 import hyperionnet.Color

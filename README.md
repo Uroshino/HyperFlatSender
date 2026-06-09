@@ -1,4 +1,4 @@
-# HyperionFlatSender
+# HyperFlatSender
 
 An Android TV app that captures the screen and streams it to a
 **[Hyperion](https://github.com/hyperion-project/hyperion.ng)** ambient-lighting server, so your

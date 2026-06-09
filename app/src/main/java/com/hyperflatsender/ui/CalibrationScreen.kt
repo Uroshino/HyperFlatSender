@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui
+package com.hyperflatsender.ui
 
 import android.content.Context
 import android.view.WindowManager
@@ -48,13 +48,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.hyperionflatsender.capture.CalibPattern
-import com.hyperionflatsender.capture.Calibration
-import com.hyperionflatsender.data.Adjustment
-import com.hyperionflatsender.data.ServerType
-import com.hyperionflatsender.data.Settings
-import com.hyperionflatsender.network.ConnectionState
-import com.hyperionflatsender.viewmodel.CalibrationViewModel
+import com.hyperflatsender.capture.CalibPattern
+import com.hyperflatsender.capture.Calibration
+import com.hyperflatsender.data.Adjustment
+import com.hyperflatsender.data.ServerType
+import com.hyperflatsender.data.Settings
+import com.hyperflatsender.network.ConnectionState
+import com.hyperflatsender.viewmodel.CalibrationViewModel
 
 @Composable
 fun CalibrationScreen(onBack: () -> Unit) {

@@ -18,5 +18,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HyperionFlatSender"
+rootProject.name = "HyperFlatSender"
 include(":app")

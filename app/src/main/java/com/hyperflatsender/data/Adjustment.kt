@@ -1,4 +1,4 @@
-package com.hyperionflatsender.data
+package com.hyperflatsender.data
 
 /**
  * The colour-calibration adjustments the app can drive over the server's JSON-RPC `adjustment`

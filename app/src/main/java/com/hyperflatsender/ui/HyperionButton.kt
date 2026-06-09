@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui
+package com.hyperflatsender.ui
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState

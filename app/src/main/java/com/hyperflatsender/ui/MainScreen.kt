@@ -1,4 +1,4 @@
-package com.hyperionflatsender.ui
+package com.hyperflatsender.ui
 
 import android.content.Context
 import android.view.WindowManager
@@ -46,11 +46,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hyperionflatsender.data.Settings
-import com.hyperionflatsender.network.ConnectionState
-import com.hyperionflatsender.service.CaptureState
-import com.hyperionflatsender.service.Stats
-import com.hyperionflatsender.viewmodel.CaptureViewModel
+import com.hyperflatsender.data.Settings
+import com.hyperflatsender.network.ConnectionState
+import com.hyperflatsender.service.CaptureState
+import com.hyperflatsender.service.Stats
+import com.hyperflatsender.viewmodel.CaptureViewModel
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
@@ -178,7 +178,7 @@ fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                "HyperionFlatSender",
+                "HyperFlatSender",
                 fontSize = titleSize,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary

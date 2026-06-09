@@ -1,4 +1,4 @@
-package com.hyperionflatsender.capture
+package com.hyperflatsender.capture
 
 /**
  * A calibration test output. [Solid]s are sent as a single Hyperion `Color` command (all LEDs one

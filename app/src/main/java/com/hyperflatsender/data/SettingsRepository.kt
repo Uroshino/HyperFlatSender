@@ -1,4 +1,4 @@
-package com.hyperionflatsender.data
+package com.hyperflatsender.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

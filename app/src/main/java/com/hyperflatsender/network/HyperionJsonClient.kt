@@ -1,4 +1,4 @@
-package com.hyperionflatsender.network
+package com.hyperflatsender.network
 
 import android.util.Log
 import kotlinx.coroutines.Dispatchers

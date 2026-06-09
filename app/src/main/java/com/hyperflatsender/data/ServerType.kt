@@ -1,4 +1,4 @@
-package com.hyperionflatsender.data
+package com.hyperflatsender.data
 
 /**
  * Which ambient-lighting server the app talks to. The FlatBuffers image protocol (screen capture

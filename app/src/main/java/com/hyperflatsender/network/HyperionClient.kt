@@ -1,7 +1,7 @@
-package com.hyperionflatsender.network
+package com.hyperflatsender.network
 
 import android.util.Log
-import com.hyperionflatsender.data.Settings
+import com.hyperflatsender.data.Settings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

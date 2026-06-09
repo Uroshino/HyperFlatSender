@@ -1,4 +1,4 @@
-package com.hyperionflatsender
+package com.hyperflatsender
 
 import android.Manifest
 import android.app.Activity
@@ -15,11 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.hyperionflatsender.ui.CalibrationScreen
-import com.hyperionflatsender.ui.MainScreen
-import com.hyperionflatsender.ui.SettingsScreen
-import com.hyperionflatsender.ui.theme.HyperionTheme
-import com.hyperionflatsender.viewmodel.CaptureViewModel
+import com.hyperflatsender.ui.CalibrationScreen
+import com.hyperflatsender.ui.MainScreen
+import com.hyperflatsender.ui.SettingsScreen
+import com.hyperflatsender.ui.theme.HyperionTheme
+import com.hyperflatsender.viewmodel.CaptureViewModel
 
 class MainActivity : ComponentActivity() {
 
