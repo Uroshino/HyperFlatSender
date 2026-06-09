@@ -1,0 +1,52 @@
+# ---- Gradle ----
+.gradle/
+build/
+
+# ---- Android build outputs ----
+*.apk
+*.aab
+*.ap_
+*.aar
+*.dex
+*.class
+release/
+captures/
+
+# ---- Native build ----
+.cxx/
+.externalNativeBuild/
+
+# ---- Kotlin ----
+.kotlin/
+
+# ---- Local / machine-specific config (contains SDK path & secrets — never commit) ----
+local.properties
+
+# ---- Signing (keep keystores out of version control) ----
+*.jks
+*.keystore
+keystore.properties
+
+# ---- IDEs / editors ----
+.idea/
+*.iml
+out/
+.vscode/
+.project
+.classpath
+.settings/
+
+# ---- Claude Code (machine-specific local config) ----
+.claude/settings.local.json
+
+# ---- Project-local agent notes (kept out — references a local Windows username) ----
+/CLAUDE.md
+
+# ---- Logs / profiling / backups ----
+*.log
+*.hprof
+*.bak
+
+# ---- OS cruft ----
+.DS_Store
+Thumbs.db
