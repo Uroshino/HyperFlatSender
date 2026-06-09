@@ -3,6 +3,10 @@ package com.hyperionflatsender.data
 data class Settings(
     val serverIp: String = "",
     val serverPort: Int = 19400,
+    // Which server the JSON-RPC colour `adjustment` keys are formatted for (Hyperion vs HyperHDR).
+    // The FlatBuffers image path is identical for both; only the calibration adjustment keys differ.
+    // See ServerType / Adjustment.
+    val serverType: ServerType = ServerType.HYPERION,
     val frameWidth: Int = 79,
     val frameHeight: Int = 43,
     val frameRate: Int = 24,
@@ -24,14 +28,17 @@ data class Settings(
     // `adjustment` command is rejected ("No Authorization"). Blank = rely on the local bypass.
     // Create one in Hyperion → Network Services → Manage Tokens (a 36-character UUID).
     val jsonToken: String = "",
-    // Colour-calibration adjustments, pushed to Hyperion over JSON-RPC (see Adjustment + the
-    // Calibration screen). All neutral (1.0) by default so a fresh install changes nothing. These
-    // map 1:1 to Hyperion's `adjustment` command fields.
-    val gammaRed: Float = 1f,
+    // Colour-calibration adjustments, pushed to the server over JSON-RPC (see Adjustment + the
+    // Calibration screen). All neutral (1.0) by default so a fresh install changes nothing. The JSON
+    // key each maps to depends on serverType (Hyperion vs HyperHDR) — see Adjustment.jsonKey.
+    val gammaRed: Float = 1f,       // Hyperion per-channel gamma (gammaRed/gammaGreen/gammaBlue)
     val gammaGreen: Float = 1f,
     val gammaBlue: Float = 1f,
-    val saturationGain: Float = 1f,
-    val brightnessGain: Float = 1f,
+    // HyperHDR has no per-channel gamma, only a single `gamma`; this holds that value, kept separate
+    // from the per-channel trio so switching server type doesn't clobber either set.
+    val gammaMono: Float = 1f,
+    val saturationGain: Float = 1f, // Hyperion + HyperHDR: saturationGain
+    val brightnessGain: Float = 1f, // Hyperion: brightnessGain · HyperHDR: luminanceGain
     // Calibration "Chase" pattern: the walking block's size as a fraction of each layout axis. Sized
     // to (over)fill a Hyperion LED sampling region so the block reads as solid white, not a dim grey.
     val chaseBlockFraction: Float = 0.22f
@@ -42,11 +49,13 @@ data class Settings(
         val MULTIPLIERS = listOf(1, 2, 3, 4)
         val DEFAULT = Settings()
 
-        // Slider bounds for the colour adjustments, matching Hyperion's accepted ranges. 1.0 is the
-        // neutral (no-op) point for all three; the defaults above sit there. Mins/maxes must stay
-        // inside Hyperion's schema-adjustment.json bounds or the whole command fails validation:
-        // gamma* 0.1–5.0, saturationGain 0.0–10.0, brightnessGain 0.1–10.0. brightnessGain's floor
-        // is 0.1 (NOT 0) — a 0 here is rejected, which is why this range can't start at 0.
+        // Slider bounds for the colour adjustments. 1.0 is the neutral (no-op) point; the defaults
+        // above sit there. Mins/maxes must stay inside BOTH servers' schema bounds or the whole
+        // command fails validation (additionalProperties:false). These ranges satisfy both:
+        //   Hyperion: gamma* 0.1–5.0, saturationGain 0.0–10.0, brightnessGain 0.1–10.0
+        //   HyperHDR: gamma  0.1–5.0, saturationGain 0.0–10.0, luminanceGain  0.0–10.0
+        // brightnessGain's floor is 0.1 (NOT 0) on Hyperion — a 0 is rejected — so this range can't
+        // start at 0 even though HyperHDR's luminanceGain would allow it.
         val GAMMA_RANGE: ClosedFloatingPointRange<Float> = 0.1f..4.0f
         val SATURATION_GAIN_RANGE: ClosedFloatingPointRange<Float> = 0f..5f
         val BRIGHTNESS_GAIN_RANGE: ClosedFloatingPointRange<Float> = 0.1f..5f

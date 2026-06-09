@@ -51,6 +51,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hyperionflatsender.capture.CalibPattern
 import com.hyperionflatsender.capture.Calibration
 import com.hyperionflatsender.data.Adjustment
+import com.hyperionflatsender.data.ServerType
 import com.hyperionflatsender.data.Settings
 import com.hyperionflatsender.network.ConnectionState
 import com.hyperionflatsender.viewmodel.CalibrationViewModel
@@ -197,7 +198,19 @@ fun CalibrationScreen(onBack: () -> Unit) {
                     fontSize = 12.sp
                 )
 
-                Adjustment.entries.forEach { adjustment ->
+                if (settings.serverType == ServerType.HYPERHDR) {
+                    Text(
+                        "HyperHDR mode: a single Gamma plus Saturation/Brightness (sent as HyperHDR's " +
+                            "gamma / saturationGain / luminanceGain). If a gain slider seems inert, " +
+                            "take HyperHDR off its “classic” calibration so the HSL gains apply.",
+                        color = Color(0xFFFFA000),
+                        fontSize = 12.sp
+                    )
+                }
+
+                // Only the sliders valid for the selected server — Hyperion exposes per-channel
+                // gamma + brightnessGain, HyperHDR a single gamma + luminanceGain (see Adjustment).
+                Adjustment.forServer(settings.serverType).forEach { adjustment ->
                     AdjustmentSlider(
                         label = adjustment.label,
                         value = adjustment.get(settings),

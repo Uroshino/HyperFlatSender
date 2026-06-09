@@ -443,17 +443,18 @@ class CaptureService : LifecycleService() {
     }
 
     /**
-     * Pushes the saved colour adjustments to Hyperion over its JSON-RPC channel on each (re)connect.
-     * Hyperion does not persist adjustments across restarts, so re-applying here makes the user's
-     * calibration "stick". Best-effort and isolated: a one-shot connection, failures are logged only
-     * (the image stream is unaffected if the JSON-RPC port is closed / auth-protected).
+     * Pushes the saved colour adjustments to the server (Hyperion or HyperHDR) over its JSON-RPC
+     * channel on each (re)connect, formatting the keys for settings.serverType. Neither server
+     * persists adjustments across restarts, so re-applying here makes the user's calibration "stick".
+     * Best-effort and isolated: a one-shot connection, failures are logged only (the image stream is
+     * unaffected if the JSON-RPC port is closed / auth-protected).
      */
     private suspend fun applyAdjustments(settings: Settings) {
         val json = HyperionJsonClient()
         try {
             if (!json.connect(settings.serverIp, settings.jsonRpcPort, settings.jsonToken)) return
-            val fields = Adjustment.entries.associate { adj ->
-                adj.jsonKey to adj.get(settings).coerceIn(adj.range.start, adj.range.endInclusive)
+            val fields = Adjustment.forServer(settings.serverType).associate { adj ->
+                adj.jsonKey(settings.serverType) to adj.get(settings).coerceIn(adj.range.start, adj.range.endInclusive)
             }
             val reply = json.setAdjustment(fields)
             if (reply?.success != true) Log.w(TAG, "Adjustment apply failed: ${reply?.error}")

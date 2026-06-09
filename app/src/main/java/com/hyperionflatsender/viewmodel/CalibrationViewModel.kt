@@ -179,10 +179,12 @@ class CalibrationViewModel(app: Application) : AndroidViewModel(app) {
                     }
                     nextJsonConnectAtMs = 0L
                 }
-                // Clamp to each field's range so a stale saved value can't push the command out of
-                // Hyperion's accepted bounds (which would fail the whole command's schema validation).
-                val fields = Adjustment.entries.associate { adj ->
-                    adj.jsonKey to adj.get(snapshot).coerceIn(adj.range.start, adj.range.endInclusive)
+                // Send only the keys valid for the selected server (Hyperion and HyperHDR use
+                // different adjustment field names, and both schemas reject the whole command on an
+                // unknown key). Clamp to each field's range so a stale saved value can't push the
+                // command out of the server's accepted bounds (which would also fail validation).
+                val fields = Adjustment.forServer(snapshot.serverType).associate { adj ->
+                    adj.jsonKey(snapshot.serverType) to adj.get(snapshot).coerceIn(adj.range.start, adj.range.endInclusive)
                 }
                 val reply = jsonClient.setAdjustment(fields)
                 when {

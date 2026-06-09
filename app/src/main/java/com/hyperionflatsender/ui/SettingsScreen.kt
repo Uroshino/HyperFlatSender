@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hyperionflatsender.BuildConfig
+import com.hyperionflatsender.data.ServerType
 import com.hyperionflatsender.data.Settings
 import kotlinx.coroutines.delay
 
@@ -163,6 +164,19 @@ fun SettingsScreen(
                 isError = portError,
                 errorText = "1–65535",
                 onValueChange = { draft = draft.copy(serverPort = it) }
+            )
+            ServerTypeSelector(
+                label = "Server type",
+                selected = draft.serverType,
+                labelWidth = labelWidth,
+                onSelect = { draft = draft.copy(serverType = it) }
+            )
+            Text(
+                "Hyperion or HyperHDR. Affects only the calibration colour-adjustment keys; the " +
+                    "captured image stream is identical for both.",
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                fontSize = 13.sp,
+                modifier = Modifier.padding(start = labelWidth ?: 0.dp, bottom = 4.dp)
             )
             SettingsNumberField(
                 label = "JSON-RPC Port",
@@ -533,6 +547,56 @@ private fun SettingsSwitchRow(
             ),
             modifier = Modifier.onFocusChanged { focused = it.isFocused }
         )
+    }
+}
+
+@Composable
+private fun ServerTypeSelector(
+    label: String,
+    selected: ServerType,
+    labelWidth: Dp?,
+    onSelect: (ServerType) -> Unit
+) {
+    val content: @Composable () -> Unit = {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            ServerType.entries.forEach { type ->
+                val isSelected = type == selected
+                HyperionButton(
+                    onClick = { onSelect(type) },
+                    modifier = Modifier.heightIn(min = 36.dp),
+                    containerColor = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)
+                                     else MaterialTheme.colorScheme.surface,
+                    focusedContainerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = if (isSelected) MaterialTheme.colorScheme.primary
+                                   else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    focusedContentColor = MaterialTheme.colorScheme.onPrimary
+                ) {
+                    Text(
+                        type.label,
+                        fontSize = 14.sp,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
+            }
+        }
+    }
+
+    if (labelWidth != null) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)
+        ) {
+            Text(label, color = MaterialTheme.colorScheme.onSurface, fontSize = 15.sp,
+                modifier = Modifier.width(labelWidth))
+            content()
+        }
+    } else {
+        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text(label, color = MaterialTheme.colorScheme.onSurface, fontSize = 14.sp,
+                fontWeight = FontWeight.Medium)
+            content()
+        }
     }
 }
 
