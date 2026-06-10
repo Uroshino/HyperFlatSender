@@ -5,4 +5,5 @@
     <string name="notif_title">HyperFlatSender</string>
     <string name="notif_text">Streaming to Hyperion</string>
     <string name="notif_text_waiting">Tap to authorize screen capture</string>
+    <string name="toggle_label">HyperFlat Toggle</string>
 </resources>

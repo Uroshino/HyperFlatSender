@@ -32,6 +32,30 @@
             </intent-filter>
         </activity>
 
+        <!-- Headless one-press capture toggle. A second launcher entry (TV Apps row + touch
+             launchers) so remote-button-mapper apps list it under "Apps", and `exported` so it can
+             also be fired via `adb shell am start -n com.hyperflatsender/.ToggleActivity` or any
+             automation tool. Transparent + excludeFromRecents + an empty taskAffinity = no visible
+             UI, no lingering recents card, kept out of MainActivity's task; the activity finish()es
+             itself in both branches. (Deliberately NOT noHistory: that can finish the activity the
+             instant it launches the consent dialog, dropping the projection result so "start" fails.) -->
+        <activity
+            android:name=".ToggleActivity"
+            android:exported="true"
+            android:label="@string/toggle_label"
+            android:icon="@mipmap/ic_launcher"
+            android:banner="@drawable/tv_banner"
+            android:theme="@style/Theme.Transparent"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".service.CaptureService"
             android:foregroundServiceType="mediaProjection"

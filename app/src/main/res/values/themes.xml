@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.HyperFlatSender" parent="android:Theme.Material.NoActionBar" />
+
+    <!-- Used by ToggleActivity so the one-press toggle shows no UI of its own — the only thing the
+         user ever sees is the system screen-capture consent dialog (when starting). -->
+    <style name="Theme.Transparent" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

@@ -5,6 +5,25 @@ All notable changes to **HyperFlatSender** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3] - 2026-06-10
+
+### Added
+- **One-press capture toggle** (`ToggleActivity`) — a second, headless launcher entry
+  ("HyperFlat Toggle") that starts capture if stopped and stops it if running, with no UI of its own. It appears
+  in the TV Apps row and in the **"Apps" list of remote-button-mapper apps** (e.g. Button Mapper), so
+  a spare remote key can toggle streaming without opening the app. Being `exported`, it is also
+  triggerable from automation or a shell: `adb shell am start -n com.hyperflatsender/.ToggleActivity`.
+  Starting still shows the system screen-capture consent dialog (a MediaProjection token can't be
+  reused or obtained from the background); stopping is instant and silent.
+
+### Fixed / hardened
+- **Boot auto-start could leave capture "running but broken."** Two stacking guards: the
+  `EXTRA_FROM_BOOT` flag is now consumed after it pops the consent dialog, so an activity recreation
+  can't re-fire it; and `CaptureService` ignores a projection-start that arrives while a session is
+  already live instead of building a second `ImageReader`/`VirtualDisplay`/capture thread over the
+  first. If a boot start ever does come up wedged, the new toggle (or `STOP`/`START`) is a clean,
+  one-press recovery.
+
 ## [1.2] - 2026-06-09
 
 ### Added

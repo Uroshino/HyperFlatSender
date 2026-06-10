@@ -90,14 +90,26 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        if (intent?.getBooleanExtra(EXTRA_FROM_BOOT, false) == true) {
-            projectionLauncher.launch(projectionManager.createScreenCaptureIntent())
-        }
+        maybeAuthorizeFromBoot(intent)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        if (intent.getBooleanExtra(EXTRA_FROM_BOOT, false)) {
+        setIntent(intent)
+        maybeAuthorizeFromBoot(intent)
+    }
+
+    /**
+     * The boot auto-start notification opens us with EXTRA_FROM_BOOT to pop the screen-capture
+     * consent dialog. Consume the flag once handled: otherwise an activity recreation (config
+     * change slips through, or process restart) re-reads the same intent and launches a SECOND
+     * consent dialog → a second capture session stacked on the first. Clearing it makes the boot
+     * authorization strictly one-shot.
+     */
+    private fun maybeAuthorizeFromBoot(launchIntent: Intent?) {
+        if (launchIntent?.getBooleanExtra(EXTRA_FROM_BOOT, false) == true) {
+            launchIntent.removeExtra(EXTRA_FROM_BOOT)
+            setIntent(launchIntent)
             projectionLauncher.launch(projectionManager.createScreenCaptureIntent())
         }
     }

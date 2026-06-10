@@ -155,6 +155,17 @@ class CaptureService : LifecycleService() {
             return Service.START_NOT_STICKY
         }
 
+        // Idempotent start: if a capture session is already live, ignore this projection result
+        // instead of building a SECOND ImageReader/VirtualDisplay/HandlerThread on top of the first
+        // (which leaks the original and leaves capture in a wedged "running but broken" state). A
+        // genuine restart always tears down first (STOP → onDestroy nulls mediaProjection), and the
+        // UI never offers START while running, so a result arriving here with a live projection is
+        // always a stray duplicate (e.g. a re-fired boot intent).
+        if (mediaProjection != null) {
+            Log.w(TAG, "Capture already active; ignoring duplicate start request")
+            return Service.START_NOT_STICKY
+        }
+
         // startForeground MUST precede getMediaProjection on API 29+
         if (android.os.Build.VERSION.SDK_INT >= 29) {
             startForeground(NOTIF_ID, buildRunningNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION)

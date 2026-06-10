@@ -27,6 +27,9 @@ it over the Hyperion FlatBuffers TCP protocol (port `19400`) — which both Hype
 - **Set-and-forget** — settings autosave, the foreground service auto-reconnects with backoff, and
   the app can auto-start on boot (one tap to authorize screen capture). A keepalive holds the lights
   on a static screen instead of letting Hyperion time out to its background colour.
+- **One-press toggle** — a separate **HyperFlat Toggle** launcher entry starts/stops streaming with no
+  UI. Map it to a spare remote key with a button-mapper app, pin it to your home screen, or fire it
+  from automation / `adb` — see [Quick toggle](#quick-toggle--remote-button).
 - **Calibration screen** — send test patterns (solid colours, a walking chase dot, a gamma ramp, an
   edge map) to verify LED count/order/orientation, and tune gamma / saturation / brightness with
   D-pad sliders over the server's JSON-RPC API (optionally token-authenticated for off-subnet setups).
@@ -55,6 +58,29 @@ it over the Hyperion FlatBuffers TCP protocol (port `19400`) — which both Hype
 
 > **Tip:** for the smoothest result, match the capture rate to your content — **24 fps** for film,
 > or a divisor of 60 (**30 / 20 / 15**) for 60 fps content. The Settings hint will guide you.
+
+## Quick toggle / remote button
+
+Installing the app adds a second, icon-only **HyperFlat Toggle** entry next to the main app. Launching
+it **toggles streaming**: if capture is stopped it asks for screen-capture permission and starts; if
+it's already running it stops instantly. It has no screen of its own, so it's meant to be triggered,
+not browsed:
+
+- **Remote button** — install a button-mapper app (e.g. *Button Mapper*), assign a spare key to an
+  **App / shortcut**, and pick **HyperFlat Toggle** from the list. One press now toggles the lights.
+- **Home screen** — on most TV launchers you can add **HyperFlat Toggle** to your favourites/home row
+  for a one-click toggle.
+- **Automation / shell** — it's an exported activity, so Tasker, Google Assistant routines, or `adb`
+  can fire it directly:
+
+  ```bash
+  adb shell am start -n com.hyperflatsender/.ToggleActivity
+  ```
+
+> Starting always shows Android's screen-capture consent dialog — a `MediaProjection` grant can't be
+> reused across sessions or obtained in the background, so that one tap is unavoidable. Stopping is
+> silent and immediate. (It's also a handy one-press recovery if a boot auto-start ever comes up in a
+> bad state.)
 
 ## Calibration & colour tuning
 
